@@ -1,38 +1,294 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+:root {
+  --theme-color: #020520;
+  --background: linear-gradient(rgb(2, 2, 119), rgb(26, 1, 65));
+  --font-blue: #00ffff;
+}
+
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(45deg, #02001f, #1f1b4e);
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  height: 100dvh;
+  background-size: cover;
+  background-attachment: fixed;
+
+
+}
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h1 {
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  font-size: 1.75rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.TodoWrapper {
+  margin-top: 5rem;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.526);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+
+  background: transparent;
+  background: linear-gradient(
+    to right bottom,
+    rgba(38, 4, 142, 0.827),
+    rgba(1, 24, 46, 0.512)
+  );
+  backdrop-filter: blur(1rem);
+  
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.TodoForm {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.todo-input {
+  outline: none;
+  background: none;
+  border: 1px solid rgb(0, 255, 242);
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: 300px;
+  color: #fff;
+}
+
+.todo-input::placeholder {
+  color: #aeaeae;
+}
+
+.todo-btn {
+  background: var(--theme-color);
+  color: #fff;
+  border: none;
+  padding: 0.55rem;
+  cursor: pointer;
+}
+
+.Todo {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  background: var(--background);
+  color: var(--font-blue);
+  padding: 0.75rem 1rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.625);
+  /* border: 1px solid #00ff00; */
+  border-bottom: 1px solid #00ff00;
+}
+
+.Todo:hover {
+  scale: 1.025;
+}
+
+.fa-trash {
+  margin-left: 0.75rem;
+}
+
+.incompleted {
+  color: #fff;
+  cursor: pointer;
+}
+
+.completed {
+  color: #00ffff7c;
+  text-decoration: line-through;
+  cursor: pointer;
+  font-style: italic;
+}
+
+.edit-icon,
+.delete-icon {
+  cursor: pointer;
+}
+
+/* Button style */
+.btn {
+  background: linear-gradient(rgb(2, 2, 119), rgb(26, 1, 65));
+  color: #222;
+  padding: 0.55rem;
+  border: none;
+  outline: none;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+
+  --background-color: linear-gradient(45deg, #02001f, #1f1b4e);
+  --border-size: 2px;
+  --accent-color: #0af;
+  --text-color: #ff2c75;
+}
+
+.btn.btn-background-slide::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background-color: var(--accent-color);
+
+  transition: transform 300ms ease-in-out;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.btn.btn-background-slide:hover:before,
+.btn.btn-background-slide:focus:before {
+  transform: scaleX(1);
+  /* border-radius: 5px; */
+}
+
+.btn.btn-background-slide {
+  color: var(--text-color);
+  transition: color 300ms ease-in-out;
+  z-index: 1;
+}
+
+.btn.btn-background-slide:hover,
+.btn.btn-background-slide:hover {
   color: white;
+  border: none;
 }
 
-.App-link {
-  color: #61dafb;
+/* checkbox style */
+
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.checkbox-container {
+  position: relative;
+  display: inline-block;
+  font-size: 8px;
+  margin-bottom: 18px;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+  animation: checkboxExpand 0.3s ease forwards;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg) scale(0);
+  width: 4px;
+  height: 10px;
+  border: solid #fff;
+  border-width: 0 3px 3px 0;
+}
+
+.checkbox-container:hover .checkmark {
+  background-color: #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+}
+
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #4caf50;
+  border-color: #4caf50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+@keyframes checkboxExpand {
+  0% {
+    transform: translate(-50%, -50%) rotate(45deg) scale(0);
   }
-  to {
-    transform: rotate(360deg);
+  100% {
+    transform: translate(-50%, -50%) rotate(45deg) scale(1);
   }
+}
+
+/* Error message */
+
+.error-message {
+  color: red;
+  margin-top: 0rem;
+  font-size: 0.8rem;
+  font-style: italic;
+  font-weight: 100;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+/* Confirm button css */
+
+.confirmation-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  border-radius: 5px;
+}
+
+.confirmation-dialog-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  width: 30vw;
+  padding: 3rem;
+  color: #fff;
+
+  background: rgba(172, 213, 250, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.438);
+
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.492);
+}
+
+.yes-btn {
+  padding: 10px 30px;
+  margin: 20px;
+}
+
+.no-btn {
+  padding: 10px 30px;
 }
